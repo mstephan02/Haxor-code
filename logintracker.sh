@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
-function getLoginAttempts() {
-  $login_attempt = Get-Winevent
+getloginattempts(){
+  attemptlist= Get-Winevent -MaxEvents 100 -LogName Security | Where-Object {$_.ID -eq 4624 -or $_.ID -eq 4625}
 }
+
+getloginattempts()
+echo $attemptlist >> loginhistory.txt
